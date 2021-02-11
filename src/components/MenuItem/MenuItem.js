@@ -3,11 +3,12 @@ import './MenuItem.scss';
 
 const MenuItem = (props) => {
     return (
-        <div style = {{
+        <div className = {`${props.size} menu-item`} >
+             <div style = {{
             backgroundImage: `url(${props.imageUrl})`,
-            backgroundSize: 'cover',
+            
 
-        }} className = {`${props.size} menu-item`} >
+        }} className = "background-image"></div>
              <div className = "content">
                 <h1 className = "title">{props.title}</h1>
                 <span className = "sub-title">SHOP NOW</span>
