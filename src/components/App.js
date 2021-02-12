@@ -3,6 +3,7 @@ import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
+import Header from './Header/Header';
 const HatsPage = (props) => {
     console.log(props);
     return <div>
@@ -20,6 +21,7 @@ export default class App extends React.Component{
     {   console.log(this.props);
         return (<div>
             <Router>
+              <Header />
               <Switch>
                 <Route path = "/" exact component = {HomePage} />
                 <Route path = "/hats" exact component = {HatsPage} />
