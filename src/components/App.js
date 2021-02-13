@@ -4,7 +4,8 @@ import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
 import Header from './Header/Header';
-import SignInSignOut from '../pages/SignInSignOutPage/SignInSignOutPage';
+
+import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 
 
 const HatsPage = (props) => {
@@ -32,7 +33,7 @@ export default class App extends React.Component{
                 <Route path = "/hats" exact component = {HatsPage} />
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
-                <Route path = "/signin" exact component = {SignInSignOut} />
+                <Route path = "/signin" exact component = {SignInSignUp} />
               </Switch>
             </Router>
         </div>)
