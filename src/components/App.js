@@ -4,6 +4,9 @@ import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
 import Header from './Header/Header';
+import SignInSignOut from '../pages/SignInSignOutPage/SignInSignOutPage';
+
+
 const HatsPage = (props) => {
     console.log(props);
     return <div>
@@ -11,6 +14,8 @@ const HatsPage = (props) => {
         <button onClick = {()=>props.history.push('/')}>Home</button>
     </div>
 }
+
+
 export default class App extends React.Component{
     
     constructor(props)
@@ -27,7 +32,8 @@ export default class App extends React.Component{
                 <Route path = "/hats" exact component = {HatsPage} />
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
-              </Switch>s
+                <Route path = "/signin" exact component = {SignInSignOut} />
+              </Switch>
             </Router>
         </div>)
     }
