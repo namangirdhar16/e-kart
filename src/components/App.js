@@ -4,7 +4,7 @@ import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
 import Header from './Header/Header';
-
+import {auth} from '../firebase/firebase.utils';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 
 
@@ -19,15 +19,29 @@ const HatsPage = (props) => {
 
 export default class App extends React.Component{
     
-    constructor(props)
+    state = { currentUser: null };
+    
+    unsubscribeFromAuth = null;
+    componentDidMount()
+    {  
+       this.unsubscribeFromAuth = auth.onAuthStateChanged((user)=>
+       {
+           this.setState({ currentUser: user});
+           console.log(user);
+       });
+
+    }
+    componentWillUnmount()
     {
-        super(props);
+        this.unsubscribeFromAuth();
     }
     render()
-    {   console.log(this.props);
+    {  
+        
+        console.log(this.props);
         return (<div>
             <Router>
-              <Header />
+              <Header currentUser = {this.state.currentUser} />
               <Switch>
                 <Route path = "/" exact component = {HomePage} />
                 <Route path = "/hats" exact component = {HatsPage} />
