@@ -4,7 +4,7 @@ import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
 import Header from './Header/Header';
-import {auth} from '../firebase/firebase.utils';
+import { auth , createsUserProfileDocument } from '../firebase/firebase.utils';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 
 
@@ -24,11 +24,25 @@ export default class App extends React.Component{
     unsubscribeFromAuth = null;
     componentDidMount()
     {  
-       this.unsubscribeFromAuth = auth.onAuthStateChanged((user)=>
+       this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth)=>
        {
-           this.setState({ currentUser: user});
-           console.log(user);
+           if(userAuth)
+           {
+             const userRef = await createsUserProfileDocument(userAuth);
+             userRef.onSnapshot((snapshot) => {
+                 this.setState({
+                     currentUser: {
+                         id: snapshot.id,
+                         ...snapshot.data()
+                     }
+                 })
+                 console.log(this.state)
+             })
+             
+           }
+           this.setState({ currentUser: userAuth});
        });
+
 
     }
     componentWillUnmount()
@@ -50,6 +64,7 @@ export default class App extends React.Component{
                 <Route path = "/signin" exact component = {SignInSignUp} />
               </Switch>
             </Router>
+            
         </div>)
     }
 }
