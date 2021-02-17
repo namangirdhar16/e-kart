@@ -8,6 +8,7 @@ import { auth , createsUserProfileDocument } from '../firebase/firebase.utils';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import { connect } from 'react-redux';
 import  setCurrentUser from '../redux/actions/user';
+import { Redirect } from 'react-router-dom';
 
 
 const HatsPage = (props) => {
@@ -61,7 +62,7 @@ class App extends React.Component{
                 <Route path = "/hats" exact component = {HatsPage} />
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
-                <Route path = "/signin" exact component = {SignInSignUp} />
+                <Route path = "/signin" exact render = {() => this.props.currentUser ? (<Redirect to = "/signin" />) : <SignInSignUp />} />
               </Switch>
             </Router>
             
@@ -69,8 +70,13 @@ class App extends React.Component{
     }
 }
 
+const mapStateToProps = ({user}) => {
+    return {
+        currentUser: user.currentUser
+    }
+}
 const mapDispatchToProps = (dispatch) => {
    return { setCurrentUser: user => dispatch(setCurrentUser(user)) };
 
 }
-export default connect(null , mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
