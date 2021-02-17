@@ -6,6 +6,8 @@ import '../App.css';
 import Header from './Header/Header';
 import { auth , createsUserProfileDocument } from '../firebase/firebase.utils';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
+import { connect } from 'react-redux';
+import  setCurrentUser from '../redux/actions/user';
 
 
 const HatsPage = (props) => {
@@ -16,10 +18,8 @@ const HatsPage = (props) => {
     </div>
 }
 
-
-export default class App extends React.Component{
+class App extends React.Component{
     
-    state = { currentUser: null };
     
     unsubscribeFromAuth = null;
     componentDidMount()
@@ -30,17 +30,17 @@ export default class App extends React.Component{
            {
              const userRef = await createsUserProfileDocument(userAuth);
              userRef.onSnapshot((snapshot) => {
-                 this.setState({
-                     currentUser: {
+                 
+                   this.props.setCurrentUser( {
                          id: snapshot.id,
                          ...snapshot.data()
-                     }
-                 })
-                 console.log(this.state)
+                     })
+                 
+                 
              })
              
            }
-           this.setState({ currentUser: userAuth});
+           this.props.setCurrentUser({ currentUser: userAuth});
        });
 
 
@@ -55,7 +55,7 @@ export default class App extends React.Component{
         console.log(this.props);
         return (<div>
             <Router>
-              <Header currentUser = {this.state.currentUser} />
+              <Header  />
               <Switch>
                 <Route path = "/" exact component = {HomePage} />
                 <Route path = "/hats" exact component = {HatsPage} />
@@ -68,3 +68,9 @@ export default class App extends React.Component{
         </div>)
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+   return { setCurrentUser: user => dispatch(setCurrentUser(user)) };
+
+}
+export default connect(null , mapDispatchToProps)(App);
