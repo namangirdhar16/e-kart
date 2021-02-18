@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth , createProfileAndDocument, createsUserProfileDocument } from '../../firebase/firebase.utils.js';
+import { auth , createUserProfileDocument } from '../../firebase/firebase.utils.js';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 
@@ -24,7 +24,7 @@ class SignUp extends React.Component{
     }
     try{
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      await createsUserProfileDocument(user , { displayName });
+      await createUserProfileDocument(user , { displayName });
       this.setState({
           email: '',
           displayName: '',

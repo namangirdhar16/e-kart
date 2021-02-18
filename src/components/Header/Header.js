@@ -6,42 +6,41 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { connect } from 'react-redux';
 
 
-const Header = ({ currentUser }) => {
-    console.log(currentUser);
+const Header = (props) => {
+    // const { currentUser } = props.currentUser;
+    // console.log(props.currentUser.currentUser);
+    const user = props.currentUser;
+    console.log(user);
+    // console.log(currentUser , 'from currentUser');
     return (
-        <div className = "header">
-            <Link to = "/"  className = "logo-container">
-                <Logo className = "logo" />
-            </Link>
-            <div className = "options">
-                <Link to = "/shop" className = "option">
-                    SHOP
-                </Link>
-                <Link to = "/contact" className = "option">
-                    CONTACT
-                </Link>
-                {
-                    currentUser ?
-                    <div onClick = {() => auth.signOut()} className = "option">
-                        SIGN IN
-                    </div>:
-                     <Link to = "/signin" className = "option">
-                     SIGN OUT
-                    </Link>
-                    
-                   
-                }
-                
-            </div>
-        </div>
-    )
-}
-
-const mapStateToProps = (state) => {
     
-    return {
-        currentUser: state.user.currentUser
-    }
-}
+    <div className='header'>
+      <Link className='logo-container' to='/'>
+        <Logo className='logo' />
+      </Link>
+      <div className='options'>
+        <Link className='option' to='/shop'>
+          SHOP
+        </Link>
+        <Link className='option' to='/shop'>
+          CONTACT 
+        </Link>
+        { props.currentUser.id !== undefined ? (
+          <div className='option' onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
+        ) : (
+          <Link className='option' to='/signin'>
+            SIGN IN
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+        }
+  const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+  });
+  
+  export default connect(mapStateToProps)(Header);
 
-export default connect(mapStateToProps)(Header);

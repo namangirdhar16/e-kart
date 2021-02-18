@@ -4,7 +4,7 @@ import ShopPage from '../pages/ShopPage/ShopPage'
 import HomePage from '../pages/HomePage/HomePage'
 import '../App.css';
 import Header from './Header/Header';
-import { auth , createsUserProfileDocument } from '../firebase/firebase.utils';
+import { auth , createUserProfileDocument } from '../firebase/firebase.utils';
 import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import { connect } from 'react-redux';
 import  setCurrentUser from '../redux/actions/user';
@@ -29,7 +29,7 @@ class App extends React.Component{
        {
            if(userAuth)
            {
-             const userRef = await createsUserProfileDocument(userAuth);
+             const userRef = await createUserProfileDocument(userAuth);
              userRef.onSnapshot((snapshot) => {
                  
                    this.props.setCurrentUser( {
@@ -62,7 +62,8 @@ class App extends React.Component{
                 <Route path = "/hats" exact component = {HatsPage} />
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
-                <Route path = "/signin" exact render = {() => this.props.currentUser ? (<Redirect to = "/signin" />) : <SignInSignUp />} />
+                <Route path = "/signin" exact 
+                  render = {() => this.props.currentUser.id !== undefined ? (<Redirect to = "/" />) : <SignInSignUp />} />
               </Switch>
             </Router>
             
@@ -75,8 +76,9 @@ const mapStateToProps = ({user}) => {
         currentUser: user.currentUser
     }
 }
+// analogous to passing action creater as props or using mapDispatch to Props
 const mapDispatchToProps = (dispatch) => {
    return { setCurrentUser: user => dispatch(setCurrentUser(user)) };
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, { setCurrentUser })(App);
