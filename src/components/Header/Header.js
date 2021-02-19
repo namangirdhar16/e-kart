@@ -11,7 +11,7 @@ import { toggleCartIcon } from '../../redux/actions/cart';
 
 
 const Header = (props) => {
-    const { currentUser } = props;
+    const { currentUser , hidden: {hidden}} = props;
     console.log(props);
     return (
     
@@ -45,7 +45,7 @@ const Header = (props) => {
         <CartIcon />
       </div>
       {
-        props.hidden.hidden ? 
+        hidden ? 
         <CartDropDown />
         :
         null
@@ -58,7 +58,7 @@ const Header = (props) => {
     return {
 
        currentUser: state.user.currentUser,
-       hidden : state.hidden
+       hidden : state.cart
   }
 };
   

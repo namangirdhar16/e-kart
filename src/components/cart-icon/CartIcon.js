@@ -13,7 +13,7 @@ const CartIcon = (props) => {
         <div className = "cart-icon">
           <ShoppingIcon className = "shopping-icon" onClick = {props.toggleCartIcon}/>
               <span className = "item-count">
-                  0
+                  {props.cartItemsCount}
               </span>
          
         </div>
@@ -21,8 +21,9 @@ const CartIcon = (props) => {
 }
 const mapStateToProps = (state) => {
    console.log(state);
+
    return {
-       
+      cartItemsCount: state.cart.cartItems.length
    }
 }
 export default connect(mapStateToProps , { toggleCartIcon })(CartIcon);
