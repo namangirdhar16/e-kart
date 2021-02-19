@@ -62,8 +62,8 @@ class App extends React.Component{
                 <Route path = "/hats" exact component = {HatsPage} />
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
-                <Route path = "/signin" exact 
-                  render = {() => this.props.currentUser.id !== undefined ? (<Redirect to = "/" />) : <SignInSignUp />} />
+                <Route path = "/signin" exact component = {SignInSignUp} />
+                   {/* render = {() => this.props.currentUser !== undefined ? (<Redirect to = "/" />) : <SignInSignUp />} /> */}
               </Switch>
             </Router>
             

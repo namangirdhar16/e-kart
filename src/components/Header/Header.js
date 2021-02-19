@@ -4,14 +4,15 @@ import './Header.scss';
 import { auth } from '../../firebase/firebase.utils.js';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/CartIcon';
+import CartDropDown from '../cart/CartDropDown';
+import { toggleCartIcon } from '../../redux/actions/cart';
+
 
 
 const Header = (props) => {
-    // const { currentUser } = props.currentUser;
-    // console.log(props.currentUser.currentUser);
-    const user = props.currentUser;
-    console.log(user);
-    // console.log(currentUser , 'from currentUser');
+    const { currentUser } = props;
+    console.log(props);
     return (
     
     <div className='header'>
@@ -25,22 +26,42 @@ const Header = (props) => {
         <Link className='option' to='/shop'>
           CONTACT 
         </Link>
-        { props.currentUser.id !== undefined ? (
+        { currentUser ? (
           <div className='option' onClick={() => auth.signOut()}>
             SIGN OUT
           </div>
-        ) : (
-          <Link className='option' to='/signin'>
-            SIGN IN
-          </Link>
-        )}
+        ) : null}
+        
+        {
+          !currentUser ? (
+            <Link className='option' to='/signin'>
+              SIGN IN
+            </Link>
+          ): null
+        }
+        {/* <div className='option' onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div> */}
+        <CartIcon />
       </div>
+      {
+        props.hidden.hidden ? 
+        <CartDropDown />
+        :
+        null
+      }
     </div>
   );
         }
-  const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
-  });
+  const mapStateToProps = state => {
+    console.log(state);
+    return {
+
+       currentUser: state.user.currentUser,
+       hidden : state.hidden
+  }
+};
   
-  export default connect(mapStateToProps)(Header);
+  
+  export default connect(mapStateToProps , { toggleCartIcon })(Header);
 
