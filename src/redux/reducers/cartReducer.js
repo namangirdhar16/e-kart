@@ -1,4 +1,4 @@
-
+import { addItemToCart } from './utils/add-item-to-cart';
 
 const INITIAL_STATE = {
     hidden: false , 
@@ -17,9 +17,10 @@ export default (state = INITIAL_STATE , action) => {
        case 'ADD_ITEM':
            return {
                ...state, 
-               cartItems: [
-                   ...state.cartItems ,action.payload
-               ]
+            //    cartItems: [
+            //        ...state.cartItems ,action.payload
+            //    ]
+            cartItems: addItemToCart(state.cartItems , action.payload)
            }
        default:
            return state;
