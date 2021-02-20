@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/bag.svg';
+import { selectCartItems, selectCartItemsCount } from '../../redux/selectors/cartSelector';
 
 import './CartIcon.scss';
 import {  toggleCartIcon } from '../../redux/actions/cart';
 import { connect } from 'react-redux';
 
 
-
+                                                                                     
 const CartIcon = (props) => {
     return (
         <div className = "cart-icon">
@@ -20,10 +21,10 @@ const CartIcon = (props) => {
     )
 }
 const mapStateToProps = (state) => {
-   console.log(state);
+   console.log('mapstate from cartIcon is called!');
 
    return {
-      cartItemsCount: state.cart.cartItems.length
+      cartItemsCount: selectCartItemsCount(state)
    }
 }
 export default connect(mapStateToProps , { toggleCartIcon })(CartIcon);

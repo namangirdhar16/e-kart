@@ -12,7 +12,7 @@ import { toggleCartIcon } from '../../redux/actions/cart';
 
 const Header = (props) => {
     const { currentUser , hidden: {hidden}} = props;
-    console.log(props);
+   // console.log(currentUser.currentUser, 'currentUser');
     return (
     
     <div className='header'>
@@ -26,22 +26,13 @@ const Header = (props) => {
         <Link className='option' to='/shop'>
           CONTACT 
         </Link>
-        { currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}>
-            SIGN OUT
-          </div>
-        ) : null}
+        <Link to = "/signin" className = "option" >
+          SIGN IN
+        </Link>
+        <div className = "option" onClick = {() => auth.signOut()}>
+          SIGN OUT
+        </div>
         
-        {
-          !currentUser ? (
-            <Link className='option' to='/signin'>
-              SIGN IN
-            </Link>
-          ): null
-        }
-        {/* <div className='option' onClick={() => auth.signOut()}>
-            SIGN OUT
-          </div> */}
         <CartIcon />
       </div>
       {
