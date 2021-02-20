@@ -9,6 +9,7 @@ import SignInSignUp from '../pages/SignInSignUp/SignInSignUp';
 import { connect } from 'react-redux';
 import  setCurrentUser from '../redux/actions/user';
 import { Redirect } from 'react-router-dom';
+import { selectCurrentUser } from '../redux/selectors/userSelector';
 
 
 const HatsPage = (props) => {
@@ -71,9 +72,9 @@ class App extends React.Component{
     }
 }
 
-const mapStateToProps = ({user}) => {
+const mapStateToProps = (state) => {
     return {
-        currentUser: user.currentUser
+        currentUser: selectCurrentUser(state)
     }
 }
 // analogous to passing action creater as props or using mapDispatch to Props
