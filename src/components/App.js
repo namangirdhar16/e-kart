@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 import  setCurrentUser from '../redux/actions/user';
 import { Redirect } from 'react-router-dom';
 import { selectCurrentUser } from '../redux/selectors/userSelector';
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
+import CheckOutPage from '../pages/checkoutPage/CheckOutPage';
+
 
 
 const HatsPage = (props) => {
@@ -64,6 +67,7 @@ class App extends React.Component{
                 <Route path = "/jackets" exact component = {HatsPage} />
                 <Route path = "/shop" exact component = {ShopPage} />
                 <Route path = "/signin" exact component = {SignInSignUp} />
+                <Route path = "/checkout" exact component = {CheckOutPage} />
                    {/* render = {() => this.props.currentUser !== undefined ? (<Redirect to = "/" />) : <SignInSignUp />} /> */}
               </Switch>
             </Router>

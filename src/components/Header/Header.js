@@ -16,8 +16,8 @@ import { createStructuredSelector } from 'reselect';
 const Header = (props) => {
     console.log(props);
   
-   const { currentUser : {currentUser}, hidden } = props;
-   console.log(currentUser);
+   const {  hidden } = props;
+  //  console.log(currentUser);
     return (
     
     <div className='header'>
@@ -32,15 +32,16 @@ const Header = (props) => {
           CONTACT 
         </Link>
         {
-          currentUser === undefined ? 
+         1 ? 
           (
             <div className = "option" onClick = {() => auth.signOut()}>
               SIGN OUT
             </div>)
-            :
+            :null}
+            {1?
             (<Link to = "/signin" className = "option" >
              SIGN IN
-           </Link>)
+           </Link>):null
         }
         <CartIcon />
       </div>
