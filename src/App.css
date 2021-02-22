@@ -1,9 +1,11 @@
 body{
     font-family: 'Open Sans Condensed' , 'sans-serif';
     padding : 20px 80px;
+    margin-right:100px;
     
 }
-*{
+*{ 
+    
     box-sizing: border-box;
 }
 a{
