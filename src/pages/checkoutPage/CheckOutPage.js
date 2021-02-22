@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartItemsTotal } from '../../redux/selectors/cartSelector';
 import CheckOutItem from '../../components/checkout-item/CheckOutItem';
+import { removeItem } from '../../redux/actions/cart';
 
 
 const CheckOutPage = ({ cartItemsTotal , cartItems}) => {
@@ -30,7 +31,7 @@ const CheckOutPage = ({ cartItemsTotal , cartItems}) => {
                 </div>
                 
             </div>
-            { cartItems.map((cartItem) => <CheckOutItem cartItem = {cartItem} />)}
+            { cartItems.map((cartItem) => <CheckOutItem  id = {cartItem.id} cartItem = {cartItem} />)}
                 <div className = "total">
                     Total: ${cartItemsTotal}
                 </div>
@@ -38,12 +39,11 @@ const CheckOutPage = ({ cartItemsTotal , cartItems}) => {
         </div>
     )
 }
-
 const mapStateToProps = createStructuredSelector(
-    {
-        cartItems: selectCartItems,
-        cartItemsTotal: selectCartItemsTotal
-    }
+   { cartItems: selectCartItems ,
+     cartItemsTotal: selectCartItemsTotal
+   }
 )
+
 
 export default connect(mapStateToProps ,{ })(CheckOutPage);
