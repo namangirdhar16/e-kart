@@ -16,8 +16,11 @@ import { createStructuredSelector } from 'reselect';
 const Header = (props) => {
     console.log(props);
   
-   const {  hidden } = props;
-  //  console.log(currentUser);
+    const {  hidden } = props;
+    
+   // const userPresent = props.currentUser.hasOwnProperty("currentUser");
+
+   
     return (
     
     <div className='header'>
@@ -32,16 +35,10 @@ const Header = (props) => {
           CONTACT 
         </Link>
         {
-         1 ? 
-          (
-            <div className = "option" onClick = {() => auth.signOut()}>
-              SIGN OUT
-            </div>)
-            :null}
-            {1?
-            (<Link to = "/signin" className = "option" >
-             SIGN IN
-           </Link>):null
+           
+          ( <Link to = "/signin" className = "option" >SIGN IN</Link>)
+        }{
+          (<div className = "option" onClick = {() => auth.signOut()}>SIGN OUT </div>)
         }
         <CartIcon />
       </div>
