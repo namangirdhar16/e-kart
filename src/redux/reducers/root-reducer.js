@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
+
 import userReducer from './userReducer';
 import cartReducer from './cartReducer';
-import { persistReducer } from 'redux-persist';
+import directoryReducer from './directoryReducer'
 
+import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { ShopReducer } from './ShopReducer';
 
 
 const persistConfig = {
@@ -14,10 +17,9 @@ const persistConfig = {
 const rootReducer =  combineReducers({
    user: userReducer,
    cart: cartReducer,
+   directory: directoryReducer,
+   shop: ShopReducer
 })
 
 
-export default persistReducer(persistConfig, rootReducer , (persistObj) => {
-     console.log('Rehydration Complete!!');
-     console.log(persistObj);
-});
+export default persistReducer(persistConfig, rootReducer);
