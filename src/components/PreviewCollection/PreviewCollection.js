@@ -4,7 +4,7 @@ import './PreviewCollection.scss';
 import CollectionItem from '../../components/CollectionItem/CollectionItem'
 
 const Collection = ({ title , items}) => {
-
+    console.log(items);
     return (
         <div className = "collection-preview">
             <h1 className = "title">{title}</h1>

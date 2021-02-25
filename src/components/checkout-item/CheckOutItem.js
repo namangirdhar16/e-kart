@@ -6,6 +6,8 @@ import { removeItem } from '../../redux/actions/cart';
 import { decreaseQuantity , increaseQuantity } from '../../redux/actions/cart';
 import { decreaseQuantityUtil } from '../../redux/reducers/utils/decrease-quantity';
 
+
+
 const CheckOutItem = ({ cartItem , removeItem , decreaseQuantity , increaseQuantity}) => {
     const  { imageUrl , name , quantity, price } = cartItem;
    
