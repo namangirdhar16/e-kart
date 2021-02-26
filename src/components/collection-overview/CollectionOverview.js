@@ -6,7 +6,6 @@ import { selectCollections } from '../../redux/selectors/shopSelector';
 import { connect } from 'react-redux';
 
 
-
 const CollectionOverview = ({ collections }) => {
 
     return (<div className = "collection-overview">
