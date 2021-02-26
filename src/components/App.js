@@ -70,6 +70,7 @@ class App extends React.Component{
                 <Route path = "/" exact component = {HomePage} />
                
                 <Route path = "/shop"  component = {ShopPage} />
+                
                 <Route path = "/signin"   render = {() => present === null ? <SignInSignUp /> : (<Redirect to = "/" />) } /> 
                 <Route path = "/checkout" exact component = {CheckOutPage} />
                   
