@@ -27,6 +27,7 @@ class App extends React.Component{
     
     
     unsubscribeFromAuth = null;
+    
     componentDidMount()
     {  
        this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth)=>
@@ -37,15 +38,17 @@ class App extends React.Component{
              userRef.onSnapshot((snapshot) => {
                  
                    this.props.setCurrentUser( {
+                       currentUser:{
                          id: snapshot.id,
                          ...snapshot.data()
+                       }
                      })
                  
                  
              })
              
            }
-           this.props.setCurrentUser({ currentUser: userAuth});
+           this.props.setCurrentUser({currentUser: userAuth});
        });
 
 
@@ -58,16 +61,16 @@ class App extends React.Component{
     {  
         
         console.log(this.props);
+        let present = this.props.currentUser===null ? null : this.props.currentUser.currentUser;
+        console.log(present);
         return (<div>
             <Router>
               <Header  />
               <Switch>
                 <Route path = "/" exact component = {HomePage} />
-                <Route path = "/hats" exact component = {HatsPage} />
-                <Route path = "/jackets" exact component = {HatsPage} />
+               
                 <Route path = "/shop"  component = {ShopPage} />
-                <Route path = "/signin" exact component = {SignInSignUp} />
-                 {/* render = {() => this.props.currentUser === null ? <SignInSignUp /> : (<Redirect to = "/" />) } /> */}
+                <Route path = "/signin"   render = {() => present === null ? <SignInSignUp /> : (<Redirect to = "/" />) } /> 
                 <Route path = "/checkout" exact component = {CheckOutPage} />
                   
               </Switch>
